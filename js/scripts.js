@@ -32,3 +32,9 @@ let pokemonList = [
     type: [ 'flying', 'normal']
   }
 ];
+
+// Create a Loop that iterates over each Item of the array and prints its name and height
+
+for (let i = 0; i < pokemonList.length; i++) {
+  document.write('<p>' + pokemonList[i].name + ' (height: ' + pokemonList[i].height + ') ' + '</p>')
+}

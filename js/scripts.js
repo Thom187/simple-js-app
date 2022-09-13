@@ -51,34 +51,6 @@ let pokemonRepository = (function () {
 
 console.log(pokemonRepository.getAll());
 
-// Create a 'for' - Loop that iterates over each Item of the array and prints its name and height
-// Use a conditional/ternary operator (if) within the loop to print a comment for the largest Pokemon
-
-// for (let i = 0; i < pokemonList.length; i++) {
-//   if (pokemonList[i].height > 0.6) {
-//     document.write(
-//       '<p>' +
-//         pokemonList[i].name +
-//         ' (height: ' +
-//         pokemonList[i].height +
-//         ') ' +
-//         ' Wow, that\'s big!' +
-//         '</p>'
-//     );
-//   } else {
-//     document.write(
-//       '<p>' +
-//         pokemonList[i].name +
-//         ' (height: ' +
-//         pokemonList[i].height +
-//         ') ' +
-//         '</p>'
-//     );
-//   }
-// }
-
-// Commented out the whole for-Loop (39-60) to refactor it as forEach-loop
-
 // Create a 'forEach' - Loop that iterates over each Item of the array and print the values of their keys
 
 let pokemonList = pokemonRepository.getAll();

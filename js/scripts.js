@@ -36,7 +36,19 @@ let pokemonRepository = (function () {
   ];
 
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    if (
+      typeof pokemon === 'object' &&
+      'name' in pokemon &&
+      'height' in pokemon &&
+      'weight' in pokemon &&
+      'type' in pokemon
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log(
+        'New Pokemon must be an object with the four keys name, height, weight and type!'
+      );
+    }
   }
 
   function getAll() {
@@ -50,6 +62,13 @@ let pokemonRepository = (function () {
 })();
 
 console.log(pokemonRepository.getAll());
+
+pokemonRepository.add({
+  name: 'Tom',
+  height: 1.78,
+  weight: 74.2,
+  type: ['human', 'student'],
+});
 
 // Create a 'forEach' - Loop that iterates over each Item of the array and print the values of their keys
 

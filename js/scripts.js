@@ -61,16 +61,24 @@ let pokemonRepository = (function () {
     let fullList = document.querySelector('.pokemon-list');//    Select class from HTML
     let listItem = document.createElement('li');//     Add <li> to <ul>
     let button = document.createElement('button');//   Add <button> to <li>
-    button.innerText = pokemon.name;              //   Label the button with the objects value of the key
+    button.innerText = pokemon.name;              //   Label the button with the value of the key
     button.classList.add('button-class');         //   Add a class to button to style it via CSS
     listItem.appendChild(button);                 //   This finally displays in HTML
     fullList.appendChild(listItem);
+    button.addEventListener('click', function(event) {// Eventlistener waiting for a click
+      showDetails(pokemon);//                            to log the details clicked on --- Eventhandler
+    })
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
   }
 
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
+    showDetails: showDetails,
   };
 })();
 
@@ -88,5 +96,5 @@ pokemonRepository.add({
 let pokemonList = pokemonRepository.getAll();
 
 pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);   
+  pokemonRepository.addListItem(pokemon);
 });

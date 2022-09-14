@@ -1,6 +1,7 @@
 :root {
   --background-color: #d4f6cc;
   --first-color: #003865;
+  --button-color: #3ccf4e
 }
 
 body {
@@ -11,4 +12,28 @@ body {
   font-weight: 400;
   font-size: 18px;
   line-height: 1.6;
+}
+
+.pokemon-list {
+  list-style: none;
+}
+
+.button-class {
+  border: none;
+  font-family: inherit;
+  background-color: var(--button-color);
+  color: var(--first-color);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  border-bottom: 2.5px solid rgba(0, 0, 0, 0.5);
+  border-right: 2.5px solid rgba(0, 0, 0, 0.5);
+  transition-duration: 0.1s opacity, font-size;
+}
+
+button:hover,
+button:focus {
+  cursor: pointer;
+  opacity: 85%;
+  font-size: 22px;
 }

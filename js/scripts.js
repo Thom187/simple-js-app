@@ -35,7 +35,9 @@ let pokemonRepository = (function () {
     },
   ];
 
+  // Create a function to add new Pokemon to the pokemonList-Array
   function add(pokemon) {
+    //Defined valid input to PUSH to pokemonList and what happens if invalid
     if (
       typeof pokemon === 'object' &&
       'name' in pokemon &&
@@ -55,9 +57,20 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function addListItem(pokemon) {
+    let fullList = document.querySelector('.pokemon-list');//    Select class from HTML
+    let listItem = document.createElement('li');//     Add <li> to <ul>
+    let button = document.createElement('button');//   Add <button> to <li>
+    button.innerText = pokemon.name;              //   Label the button with the objects value of the key
+    button.classList.add('button-class');         //   Add a class to button to style it via CSS
+    listItem.appendChild(button);                 //   This finally displays in HTML
+    fullList.appendChild(listItem);
+  }
+
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
   };
 })();
 
@@ -74,20 +87,6 @@ pokemonRepository.add({
 
 let pokemonList = pokemonRepository.getAll();
 
-pokemonList.forEach(function (pokemon) {
-  if (pokemon.height > 0.6) {
-    document.write(
-      '<p>' +
-        pokemon.name +
-        ' (height: ' +
-        pokemon.height +
-        ') ' +
-        ' Wow, that\'s big!' +
-        '</p>'
-    );
-  } else {
-    document.write(
-      '<p>' + pokemon.name + ' (height: ' + pokemon.height + ') ' + '</p>'
-    );
-  }
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);   
 });

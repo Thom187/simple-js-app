@@ -1,54 +1,20 @@
-// Creating a [array] of {objects} using 'strings' and floats --> e.g. 0.7
-//              complex data               primitive data
+//
 let pokemonRepository = (function () {
-  // Wrapped pokemonList array in an IIFE
-  let pokemonList = [
-    {
-      name: 'Bulbasaur',
-      height: 0.7,
-      weight: 6.9,
-      type: ['grass', 'poison'],
-    },
-    {
-      name: 'Charmander',
-      height: 0.6,
-      weight: 8.5,
-      type: ['fire', 'fire'],
-    },
-    {
-      name: 'Squirtle',
-      height: 0.5,
-      weight: 9.0,
-      type: ['water', 'water'],
-    },
-    {
-      name: 'Caterpie',
-      height: 0.3,
-      weight: 2.9,
-      type: ['bug', 'bug'],
-    },
-    {
-      name: 'Pidgey',
-      height: 0.3,
-      weight: 1.8,
-      type: ['flying', 'normal'],
-    },
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   // Create a function to add new Pokemon to the pokemonList-Array
   function add(pokemon) {
-    //Defined valid input to PUSH to pokemonList and what happens if invalid
+    //Defines valid input to PUSH to pokemonList and what happens if invalid
     if (
       typeof pokemon === 'object' &&
       'name' in pokemon &&
-      'height' in pokemon &&
-      'weight' in pokemon &&
-      'type' in pokemon
+      'detailsUrl' in pokemon
     ) {
       pokemonList.push(pokemon);
     } else {
       console.log(
-        'New Pokemon must be an object with the four keys name, height, weight and type!'
+        'New Pokemon must be an object with the two keys name and detailsUrl!'
       );
     }
   }
@@ -59,41 +25,72 @@ let pokemonRepository = (function () {
 
   function addListItem(pokemon) {
     let fullList = document.querySelector('.pokemon-list');//    Select class from HTML
-    let listItem = document.createElement('li');//     Add <li> to <ul>
-    let button = document.createElement('button');//   Add <button> to <li>
-    button.innerText = pokemon.name;              //   Label the button with the value of the key
-    button.classList.add('button-class');         //   Add a class to button to style it via CSS
-    listItem.appendChild(button);                 //   This finally displays in HTML
+    let listItem = document.createElement('li');//    Add <li> to <ul>
+    let button = document.createElement('button');//  Add <button> to <li>
+    button.innerText = pokemon.name;              //  Label the button with the value of the key
+    button.classList.add('button-class');         //  Add a class to button to style it via CSS
+    listItem.appendChild(button);                 //  This finally adds and displays the elements in HTML
     fullList.appendChild(listItem);
     button.addEventListener('click', function(event) {// Eventlistener waiting for a click
       showDetails(pokemon);//                            to log the details clicked on --- Eventhandler
     })
   }
 
+  // The LoadList() method will fetch data from the API,
+  // then add each Pokémon in the fetched data to pokemonList with the add function implemented above.
+  // each item gets a name and a detailsUrl property.
+  // detailsUrl property is used to load the detailed data for a given Pokémon.
+  // For this, you add a loadDetails() function, which takes a Pokémon item as an argument
+
+  function loadList() {
+  return fetch(apiUrl).then(function (response) {
+    return response.json();
+  }).then(function (json) {
+    json.results.forEach(function (item) {
+      let pokemon = {
+        name: item.name,
+        detailsUrl: item.url
+      };
+      add(pokemon);
+    });
+  }).catch(function (e) {
+    console.error(e);
+  })
+}
+
+function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      //  add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.weight = details.weight;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+
   function showDetails(pokemon) {
-    console.log(pokemon);
+    loadDetails(pokemon).then(function () {
+      console.log(pokemon);
+    });
   }
 
   return {
     add,
     getAll,
     addListItem,
+    loadList,
+    loadDetails,
   };
 })();
 
-console.log(pokemonRepository.getAll());
-
-pokemonRepository.add({
-  name: 'Tom',
-  height: 1.78,
-  weight: 74.2,
-  type: ['human', 'student'],
-});
-
-// Create a 'forEach' - Loop that iterates over each Item of the array and print the values of their keys
-
-let pokemonList = pokemonRepository.getAll();
-
-pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function() {
+  // That loads the data!
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });

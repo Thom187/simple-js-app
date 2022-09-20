@@ -14,8 +14,15 @@ body {
   line-height: 1.6;
 }
 
+.main-heading {
+  text-align: center;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
 .pokemon-list {
   list-style: none;
+  text-align: center;
 }
 
 .button-class {
@@ -29,6 +36,7 @@ body {
   border-bottom: 2.5px solid rgba(0, 0, 0, 0.5);
   border-right: 2.5px solid rgba(0, 0, 0, 0.5);
   transition-duration: 0.1s opacity, font-size;
+  text-transform: capitalize;
 }
 
 button:hover,
@@ -86,6 +94,7 @@ button:focus {
 
 .modal h1 {
   margin-top: 0;
+  text-transform: uppercase;
 }
 
 .modal p {

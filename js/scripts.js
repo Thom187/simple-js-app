@@ -81,9 +81,67 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      console.log(pokemon);
+    //  console.log(pokemon);
+    showModal(pokemon);
     });
   }
+
+  // Define a modal container
+  let modalContainer = document.querySelector('#modal-container');
+  // Clear all existing content from modalContainer
+  modalContainer.innerHTML = '';
+
+  // Add the modal
+  function showModal(pokemon) {
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    // Create new content to the empty modalContainer
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'X';
+    closeButtonElement.addEventListener('click', hideModal);
+
+    let titleElement = document.createElement('h1');
+    titleElement.innerText = pokemon.name;
+
+    let contentElement = document.createElement('p');
+    contentElement.innerText = 'Height: ' + pokemon.height + ', Weight: ' + pokemon.weight + ', Types: ' + pokemon.types;
+
+    let imageElement = document.createElement('img');
+    imageElement.src = pokemon.imageUrl;
+
+    // Append created Content to parent element
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(contentElement);
+    modal.appendChild(imageElement);
+    modalContainer.appendChild(modal);
+
+    // Add a new class for visible modalContainer
+    modalContainer.classList.add('is-visible');
+  }
+
+  function hideModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+    modalContainer.innerText = '';
+  }
+
+  // Allow to close modal by pressing esc
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
+  });
+
+  // Allow to close the modal by clicking outside the modal
+  modalContainer.addEventListener('click', (e) => {
+    let target = e.target;
+    if (target === modalContainer) {
+      hideModal();
+    }
+  });
 
   return {
     add,

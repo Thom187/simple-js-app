@@ -23,15 +23,16 @@ let pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
-    let fullList = document.querySelector('.pokemon-list'); //    Select class from HTML
-    let listItem = document.createElement('li'); //    Add <li> to <ul>
-    let button = document.createElement('button'); //  Add <button> to <li>
-    button.innerText = pokemon.name; //  Label the button with the value of the key
-    button.classList.add('button-class'); //  Add a class to button to style it via CSS
-    listItem.appendChild(button); //  This finally adds and displays the elements in HTML
-    fullList.appendChild(listItem);
+    let fullList = $('.pokemon-list'); //    Select class from HTML
+    let listItem = $('<li class ="list-group-item"></li>'); //    Add <li> to <ul>
+    //  Add <button> to <li> and label the button with pokemon.name and add a class
+    let button = $(
+      `<button type="button" class="btn list-group-item list-group-item-action button-class" data-toggle="modal" data-target="#exampleModal">${pokemon.name}</button>`
+    );
+    listItem.append(button); //  This finally adds and displays the elements in HTML
+    fullList.append(listItem);
     // Eventlistener waiting for a click to log the details clicked on --- Eventhandler
-    button.addEventListener('click', function (event) {
+    button.on('click', function () {
       showDetails(pokemon);
     });
   }
@@ -84,7 +85,7 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-       console.log(pokemon);
+      console.log(pokemon);
       showModal(pokemon);
     });
   }

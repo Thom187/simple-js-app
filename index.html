@@ -23,10 +23,29 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
   </head>
   <body>
-    <div id="modal-container"></div>
     <header>
       <div class="container">
-        <h1 class="main-heading">PokeDex</h1>
+        <nav class="navbar navbar-expand-sm navbar-light fixed-top" id="navbar">
+          <a class="navbar-brand mx-auto" href="#">
+            <img src="img/pokeball.png" height="40" width="40"  alt="pokeball icon"> PokeDex
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expandend="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="#bottom">Bottom<span class="sr-only">(current)</span>
+            </a>
+          </li>
+            </ul>
+
+          </div>
+        </nav>
       </div>
     </header>
     <main>
@@ -34,9 +53,30 @@
         <ul class="list-group pokemon-list">
         </ul>
       </div>
+      <!-- Button trigger modal is applied to JS -->
+      <!-- Modal -->
+      <div class="modal fade" id="modalContainer" tabindex="-1" role="dialog" aria-labelledby="exampleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleTitle">Modal title</h5>
+              <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+              <span area-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
     </main>
-    <script src="js/promise-polyfill.js"></script>
-    <script src="js/fetch-polyfill.js"></script>
     <!-- Apply Bootstrap's JS ( 1. jQuery, 2. Popper.js, 3. Bootstrap's JS-plugins )  -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -53,7 +93,10 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="js/promise-polyfill.js"></script>
+    <script src="js/fetch-polyfill.js"></script>
     <script src="js/script.js"></script>
     <script src="js/tota11y.min.js"></script>
   </body>
+  <footer id="bottom"></footer>
 </html>

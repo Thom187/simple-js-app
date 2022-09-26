@@ -18,6 +18,10 @@ body {
   line-height: 1.6;
 }
 
+.navbar {
+  background-color: var(--first-color);
+}
+
 .navbar-collapse {
   flex-grow: 0;
 }

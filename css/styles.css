@@ -73,13 +73,18 @@ body {
 
 .modal-content {
   text-align: center;
+  background-color: var(--first-color);
+  color: var(--background-color);
 }
 
 .modal-close {
   float: right;
   -webkit-appearence: none;
+  font-size: small;
   border: none;
-  background-color: #fff;
+  border-radius: 35%;
+  background-color: #000;
+  color: #fff;
 }
 
 .modal h1 {

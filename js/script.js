@@ -1,3 +1,5 @@
+// Let ESLint now that I work with jQuery
+/* eslint-env jquery */
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
@@ -92,7 +94,6 @@ let pokemonRepository = (function () {
 
   // Add the modal, define elements
   function showModal(pokemon) {
-    let modalHeader = $('.modal-header');
     let modalBody = $('.modal-body');
     let modalTitle = $('.modal-title');
     let modalFooter = $('.modal-footer');

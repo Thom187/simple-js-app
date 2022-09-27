@@ -77,6 +77,11 @@ body {
   color: var(--background-color);
 }
 
+.modal-img {
+  width: 165px;
+  height: 165px;
+}
+
 .modal-close {
   float: right;
   -webkit-appearence: none;

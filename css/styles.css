@@ -29,6 +29,7 @@ body {
 .list-group {
   margin-bottom: 25px;
   display: grid;
+  justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(255px, 3fr));
 }
 
